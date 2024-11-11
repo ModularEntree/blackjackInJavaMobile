@@ -8,7 +8,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class game extends AppCompatActivity {
+public class game extends AppCompatActivity implements InfoIntentExtras{
+    private Info info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +21,19 @@ public class game extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+    }
+
+    @Override
+    public void infoIfExists() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            info = extras.getParcelable("info");
+        }
+        else {
+            info = new Info();
+        }
     }
 }
+
