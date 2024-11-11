@@ -1,9 +1,6 @@
 package cz.bednar.st.blackjack;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class menu extends AppCompatActivity implements InfoIntentExtras{
+public class menuActivity extends AppCompatActivity implements InfoIntentExtras{
     protected Info info;
-    protected TextView bankStatus;
+    protected TextView bankStatus = findViewById(R.id.bankStatus);
     protected EditText sazkaCislo;
     protected Button playButton;
 
@@ -26,11 +23,11 @@ public class menu extends AppCompatActivity implements InfoIntentExtras{
         infoIfExists();
         setBank();
 
-        bankStatus = findViewById(R.id.bankStatus);
         sazkaCislo = findViewById(R.id.sazkaCislo);
+
         playButton = findViewById(R.id.playButton);
 
-        Intent intent = new Intent(this, game.class);
+        Intent toGame = new Intent(this, gameActivity.class);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -38,16 +35,16 @@ public class menu extends AppCompatActivity implements InfoIntentExtras{
                 info.setSazka(Double.parseDouble(sazkaCislo.getText().toString()));
 
                 if (info.getSazka() < 0) {
-                    Toast.makeText(menu.this, "Nemůžete vsadit nekladnou hodnotu.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(menuActivity.this, "Nemůžete vsadit nekladnou hodnotu.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (info.getSazka() > info.getBank()) {
-                    Toast.makeText(menu.this, "Vsázíte víc, než je váš stávající bank.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(menuActivity.this, "Vsázíte víc, než je váš stávající bank.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                intent.putExtra("info", info);
-                startActivity(intent);
+                toGame.putExtra("info", info);
+                startActivity(toGame);
             }
         };
 
