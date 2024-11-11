@@ -18,7 +18,7 @@
             android:id="@+id/bankText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bank: "
+            android:text="@string/bankTextViewText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
@@ -35,7 +35,7 @@
             android:id="@+id/bankMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=",- Kč"
+            android:text="@string/moneyTypeTextViewText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
@@ -47,7 +47,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="236dp"
         android:ems="10"
+        android:hint="@string/sazkaEditTextText"
         android:inputType="number"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/playButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -57,7 +59,7 @@
         android:id="@+id/sazkaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Výše sázky:"
+        android:text="@string/sazkaTextViewText"
         app:layout_constraintBottom_toTopOf="@+id/sazkaCislo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="175dp"
-        android:text="Hra!"
+        android:text="@string/playButtonText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

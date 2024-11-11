@@ -19,7 +19,7 @@
             android:id="@+id/bankText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bank: "
+            android:text="@string/bankTextViewText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
@@ -36,7 +36,7 @@
             android:id="@+id/bankMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=",- Kč"
+            android:text="@string/moneyTypeTextViewText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
-                android:text="Karty krupiéra: "/>
+                android:text="@string/casinoCardsTextViewText"/>
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
-                android:text="Tvoje karty: " />
+                android:text="@string/yourCardsTextViewText" />
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -93,7 +93,7 @@
                 android:id="@+id/playerCards"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:text="XXX"/>
         </LinearLayout>
 
@@ -118,14 +118,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Hit" />
+                android:text="@string/hitButtonText" />
 
             <Button
                 android:id="@+id/standButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Stand" />
+                android:text="@string/standButtonText" />
         </LinearLayout>
 
         <LinearLayout
@@ -138,13 +138,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Double" />
+                android:text="@string/doubleButtonText" />
             <Button
                 android:id="@+id/vzdatButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Vzdát se" />
+                android:text="@string/giveUpButtonText" />
         </LinearLayout>
     </LinearLayout>
 
