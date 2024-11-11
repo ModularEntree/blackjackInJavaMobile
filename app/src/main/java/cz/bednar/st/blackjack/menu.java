@@ -14,23 +14,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class menu extends AppCompatActivity implements InfoIntentExtras{
-    Info info;
-    TextView bankStatus;
-    EditText sazkaCislo;
-    Button playButton;
+    protected Info info;
+    protected TextView bankStatus;
+    protected EditText sazkaCislo;
+    protected Button playButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        infoIfExists();
+        setBank();
 
         bankStatus = findViewById(R.id.bankStatus);
         sazkaCislo = findViewById(R.id.sazkaCislo);
         playButton = findViewById(R.id.playButton);
 
         Intent intent = new Intent(this, game.class);
-
-        bankStatus.setText(Info.bankChange(info.getBank()));
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -53,6 +53,11 @@ public class menu extends AppCompatActivity implements InfoIntentExtras{
 
         playButton.setOnClickListener(listener);
 
+    }
+
+    @Override
+    public void setBank() {
+        bankStatus.setText(Info.bankChange(info.getBank()));
     }
 
     @Override
