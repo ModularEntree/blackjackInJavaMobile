@@ -186,7 +186,25 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
                     }
 
                     switch (action) {
-                        case
+                        case hitAction: {
+
+                            break;
+                        }
+                        case standAction: {
+
+                            break;
+                        }
+                        case doubleAction: {
+
+                            break;
+                        }
+                        case vzdatAction: {
+
+                            break;
+                        }
+                        default: {
+                            break;
+                        }
                     }
 
                 }
