@@ -6,15 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".menu">
 
-    <TextView
-        android:id="@+id/bankStatus"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Bank: CHYBA"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:id="@+id/bankText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bank: "
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <TextView
+            android:id="@+id/bankStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XXX"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/bankMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=",- Kč"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/sazkaCislo"
