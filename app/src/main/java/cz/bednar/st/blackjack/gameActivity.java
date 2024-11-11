@@ -2,6 +2,7 @@ package cz.bednar.st.blackjack;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
     protected Info info;
@@ -22,6 +24,9 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
     protected Button buttonStand;
     protected Button buttonDouble;
     protected Button buttonVzdat;
+    protected Intent toMenu;
+    protected CountDownLatch wait;
+    protected Blackjack game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,8 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
         infoIfExists();
         setBank();
 
+        game = new Blackjack();
+
         bankStatus = findViewById(R.id.bankStatus);
 
         casinoCardsView = findViewById(R.id.casinoCards);
@@ -46,16 +53,44 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
         buttonDouble = findViewById(R.id.doubleButton);
         buttonVzdat = findViewById(R.id.vzdatButton);
 
-        Intent toMenu = new Intent(this, menuActivity.class);
+        View.OnClickListener hitAct = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                game.setAction(Blackjack.hitAction);
+                wait.countDown();
+            }
+        };
+        View.OnClickListener standAct = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                game.setAction(Blackjack.standAction);
+                wait.countDown();
+            }
+        };
+        View.OnClickListener doubleAct = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                game.setAction(Blackjack.doubleAction);
+                wait.countDown();
+            }
+        };
+        View.OnClickListener vzdatAct = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                game.setAction(Blackjack.vzdatAction);
+                wait.countDown();
+            }
+        };
 
-        Blackjack game = new Blackjack();
-        game.playGame();
+        toMenu = new Intent(this, menuActivity.class);
 
-        toMenu.putExtra("info", info);
-        startActivity(toMenu);
+        buttonHit.setOnClickListener(hitAct);
+        buttonStand.setOnClickListener(standAct);
+        buttonDouble.setOnClickListener(doubleAct);
+        buttonVzdat.setOnClickListener(vzdatAct);
+
+        new Thread(() -> game.playGame());
     }
-
-
 
     @Override
     public void setBank() {
@@ -74,6 +109,21 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
     }
 
     protected class Blackjack {
+        // Herní konstanty
+        private static final int maxVelikostRuky = 7;
+        private static final int vyherniSum = 21;
+        public static final int maxVelikostBalicku = 12;
+
+        // Herní input
+
+        private int action;
+
+        // Herní konstanty inputů
+        public static final int hitAction = 1;
+        public static final int standAction = 2;
+        public static final int doubleAction = 3;
+        public static final int vzdatAction = 4;
+
         // Možné konce hry
         private static final int blackjack = 1;
         private static final int win = 2;
@@ -84,20 +134,36 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
         // Násobiče sázky
         private static final double blackjackRate = 0.5;
         private static final int doubleRate = 2;
+
+        // Hra
         public void playGame() {
             Karta [] balicek = Karta.getBalicek();
 
-            Karta [] casinoCards = new Karta[Karta.maxVelikostRuky];
-            Karta [] playerCards = new Karta[Karta.maxVelikostRuky];
+            Karta [] casinoCards = new Karta[maxVelikostRuky];
+            Karta [] playerCards = new Karta[maxVelikostRuky];
 
             Random rand = new Random();
 
-            int randomValue = 0;
+            int randomNumber = 0;
             boolean firstRound = false;
             int cardsGiven = 0;
 
-            while (true) {
+            CountDownLatch wait = new CountDownLatch(1);
 
+            do {
+                for (int i = 1; i <= 2 ; i++) {
+                    // Náhodně volí karty, které se ještě vyskytují v balíčku
+                    do {
+                        randomNumber = rand.nextInt(maxVelikostBalicku - 1);
+                    } while (balicek[randomNumber].pouzito);
+
+                    balicek[randomNumber].pouzito = true;
+
+                    if (i == 1)
+                        casinoCards[cardsGiven] = new Karta(balicek[randomNumber]);
+                    else
+                        playerCards[cardsGiven] = new Karta(balicek[randomNumber]);
+                }
 
                 cardsGiven++;
 
@@ -105,11 +171,29 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
                     firstRound = true;
                 }
 
-                if (firstRound && (sumHand(playerCards) == Karta.vyherniSum)) {
-                    calcNewBank(blackjack);
-                    break;
+                if (firstRound) {
+                    if (cardsGiven == 2 && sumHand(playerCards) == vyherniSum) {
+                        calcNewBank(blackjack);
+                        break;
+                    }
+
+                    // čeká na input, ach bože
+
+                    try {
+                        wait.await();
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    switch (action) {
+                        case
+                    }
+
                 }
-            }
+            }while(true);
+
+            toMenu.putExtra("info", info);
+            startActivity(toMenu);
         }
 
         protected int sumHand(Karta [] hand) {
@@ -148,6 +232,10 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
                     break;
                 }
             }
+        }
+
+        public void setAction(int action) {
+            this.action = action;
         }
     }
 }
