@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Blackjack</string>
+    <string name="giveUpButtonText">Give up</string>
+    <string name="yourCardsTextViewText">"Your cards: "</string>
+    <string name="casinoCardsTextViewText">"Casino's cards: "</string>
+    <string name="moneyTypeTextViewText">$</string>
+    <string name="bankTextViewText">"Ballance: "</string>
+    <string name="sazkaTextViewText">"Your bet: "</string>
+    <string name="playButtonText">Play!</string>
+    <string name="sazkaEditTextText">Try 100$</string>
+</resources>

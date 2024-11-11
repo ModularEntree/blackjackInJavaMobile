@@ -1,14 +1,15 @@
 <resources>
     <string name="app_name">Blackjack</string>
     <string name="giveUpButtonText">Vzdát se</string>
-    <string name="doubleButtonText">Double</string>
-    <string name="standButtonText">Stand</string>
-    <string name="hitButtonText">Hit</string>
-    <string name="yourCardsTextViewText">Tvoje karty:</string>
-    <string name="casinoCardsTextViewText">Karty krupiéra:</string>
+    <string name="doubleButtonText" translatable="false">Double</string>
+    <string name="standButtonText" translatable="false">Stand</string>
+    <string name="hitButtonText" translatable="false">Hit</string>
+    <string name="yourCardsTextViewText">"Tvoje karty: "</string>
+    <string name="casinoCardsTextViewText">"Karty krupiéra: "</string>
     <string name="moneyTypeTextViewText">,- Kč</string>
-    <string name="bankTextViewText">Bank:</string>
-    <string name="sazkaTextViewText">Výše sázky:</string>
+    <string name="bankTextViewText">"Bank: "</string>
+    <string name="sazkaTextViewText">"Výše sázky: "</string>
     <string name="playButtonText">Hra!</string>
-    <string name="sazkaEditTextText">Min. 100 je doporučeno</string>
+    <string name="sazkaEditTextText">Zkus 100,- Kč</string>
+    <string name="placeholderTextViewText" translatable="false">XXX</string>
 </resources>
