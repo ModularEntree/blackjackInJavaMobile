@@ -17,16 +17,17 @@ public class Karta {
     public Karta(Karta karta) {
         this.oznaceni = karta.oznaceni;
         this.hodnota = karta.hodnota;
-        this.pouzito = false;
+        this.pouzito = true;
     }
 
     static public Karta [] getBalicek(){
         Karta [] balicek = new Karta[gameActivity.Blackjack.maxVelikostBalicku];
 
         balicek[0] = new Karta('A', 1);
-        for (int i = 1; i <= 10 ; i++) {
-            balicek[i] = new Karta((char) i, i);
+        for (int i = 1; i < 10 ; i++) {
+            balicek[i] = new Karta(Character.forDigit(i, 10), i);
         }
+        balicek[10] = new Karta('D', 10);
         balicek[11] = new Karta('S', 11);
 
         return balicek;

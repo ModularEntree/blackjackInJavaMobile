@@ -203,7 +203,7 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
                 if (firstRoundPassed) {
                     if (cardsGiven == 2 && sumHand(playerCards) == vyherniSum) {
                         calcNewBank(blackjack);
-                        return;
+                        break;
                     }
 
                     if (lastRound) {
@@ -225,13 +225,12 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
 
                     setCardsDisplay(casinoCards, playerCards);
 
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            casinoCardsView.setText("AAA");
-//                            playerCardsView.setText("AAA");
-//                        }
-//                    });
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(gameActivity.this, "????????", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
                     try {
                         wait.await();
