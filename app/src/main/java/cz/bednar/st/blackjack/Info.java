@@ -1,9 +1,14 @@
 package cz.bednar.st.blackjack;
 
+import android.content.res.Resources;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class Info implements Parcelable {
+    protected static final String ballanceTextInfo = Resources.getSystem().getString(R.string.ballanceTextInfo);
+    
     @Override
     public int describeContents() {
         return 0;
@@ -41,7 +46,7 @@ public class Info implements Parcelable {
     }
 
     static public String bankChange(double bank) {
-        return "Bank: " + bank + ",- Kč";
+        return ballanceTextInfo + bank + ",- Kč";
     }
 
     public double getBank() {

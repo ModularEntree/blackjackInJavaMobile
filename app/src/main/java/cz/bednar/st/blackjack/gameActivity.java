@@ -1,10 +1,12 @@
 package cz.bednar.st.blackjack;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -109,6 +111,10 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
     }
 
     protected class Blackjack {
+        // Toast messages
+        protected final String warnCannotDoubleTextBlackjack = Resources.getSystem().getString(R.string.warnCannotDoubleTextBlackjack);
+        private final String warnCannotHitOver21TextBlackJack = Resources.getSystem().getString(R.string.warnCannotHitOver21TextBlackJack);
+
         // Herní konstanty
         private static final int maxVelikostRuky = 7;
         private static final int vyherniSum = 21;
@@ -144,40 +150,65 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
 
             Random rand = new Random();
 
-            int randomNumber = 0;
-            boolean firstRound = false;
+            int validCardRes;
+            boolean firstRoundPassed = false;
             int cardsGiven = 0;
+            boolean doubleWin = false;
+            boolean vzdalTo = false;
+            boolean lastRound = false;
 
             CountDownLatch wait = new CountDownLatch(1);
 
+            // HRA!
+
             do {
-                for (int i = 1; i <= 2 ; i++) {
-                    // Náhodně volí karty, které se ještě vyskytují v balíčku
-                    do {
-                        randomNumber = rand.nextInt(maxVelikostBalicku - 1);
-                    } while (balicek[randomNumber].pouzito);
+                if (vzdalTo) break;
+                if (!lastRound) {
+                    for (int i = 1; i <= 2; i++) {
+                        validCardRes = validCard(balicek);
 
-                    balicek[randomNumber].pouzito = true;
+                        if (i == 1) {
+                            casinoCards[cardsGiven] = new Karta(balicek[validCardRes]);
+                        } else
+                            playerCards[cardsGiven] = new Karta(balicek[validCardRes]);
+                    }
+                }
+                else if (sumHand(playerCards) > sumHand(casinoCards) && sumHand(playerCards) <= vyherniSum){
+                    validCardRes = validCard(balicek);
 
-                    if (i == 1)
-                        casinoCards[cardsGiven] = new Karta(balicek[randomNumber]);
-                    else
-                        playerCards[cardsGiven] = new Karta(balicek[randomNumber]);
+                    casinoCards[cardsGiven] = new Karta(balicek[validCardRes]);
                 }
 
                 cardsGiven++;
 
                 if (cardsGiven == 2) {
-                    firstRound = true;
+                    firstRoundPassed = true;
                 }
 
-                if (firstRound) {
+                if (firstRoundPassed) {
                     if (cardsGiven == 2 && sumHand(playerCards) == vyherniSum) {
                         calcNewBank(blackjack);
+                        return;
+                    }
+
+                    if (lastRound) {
+                        if (sumHand(playerCards) < sumHand(casinoCards)) {
+                            if ((doubleWin))
+                                calcNewBank(winDouble);
+                            else
+                                calcNewBank(win);
+                        } else {
+                            if ((doubleWin))
+                                calcNewBank(loseDouble);
+                            else
+                                calcNewBank(lose);
+                        }
                         break;
                     }
 
                     // čeká na input, ach bože
+
+                    setCardsDisplay(casinoCards, playerCards);
 
                     try {
                         wait.await();
@@ -186,32 +217,54 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
                     }
 
                     switch (action) {
+                        case doubleAction: {
+                            if (cardsGiven <= 2)
+                                doubleWin = true;
+                            else
+                                Toast.makeText(gameActivity.this, warnCannotDoubleTextBlackjack, Toast.LENGTH_SHORT).show();
+                        }
                         case hitAction: {
-
-                            break;
+                            if (sumHand(playerCards) >= 21)
+                                continue;
+                            else
+                                Toast.makeText(gameActivity.this, warnCannotHitOver21TextBlackJack, Toast.LENGTH_SHORT).show();
                         }
                         case standAction: {
-
-                            break;
-                        }
-                        case doubleAction: {
-
+                            lastRound = true;
                             break;
                         }
                         case vzdatAction: {
-
+                            vzdalTo = true;
                             break;
                         }
                         default: {
+                            Toast.makeText(gameActivity.this, "Akce nevybrana?", Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }
-
                 }
             }while(true);
 
             toMenu.putExtra("info", info);
             startActivity(toMenu);
+        }
+
+        protected void setCardsDisplay(Karta [] casinoCards, Karta [] playerCards) {
+            StringBuilder finalStringCasino = new StringBuilder();
+            StringBuilder finalStringPlayer = new StringBuilder();
+
+            for (int i = 0; i <= casinoCards.length - 1 ; i++) {
+                finalStringCasino.append(casinoCards[i].oznaceni);
+                if (i != casinoCards.length - 1 ) finalStringCasino.append(" ");
+            }
+
+            for (int i = 0; i <= playerCards.length - 1 ; i++) {
+                finalStringPlayer.append(playerCards[i].oznaceni);
+                if (i != playerCards.length - 1 ) finalStringPlayer.append(" ");
+            }
+
+            casinoCardsView.setText(finalStringCasino.toString());
+            playerCardsView.setText(finalStringPlayer.toString());
         }
 
         protected int sumHand(Karta [] hand) {
@@ -222,6 +275,19 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras{
             }
 
             return sum;
+        }
+
+        protected int validCard(Karta [] balicek) {
+            Random rand = new Random();
+            int randomNumber;
+            // Náhodně volí karty, které se ještě vyskytují v balíčku
+            do {
+                randomNumber = rand.nextInt(maxVelikostBalicku - 1);
+            } while (balicek[randomNumber].pouzito);
+
+            balicek[randomNumber].pouzito = true;
+
+            return randomNumber;
         }
 
         protected void calcNewBank(int status) {

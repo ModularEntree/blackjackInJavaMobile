@@ -11,6 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class menuActivity extends AppCompatActivity implements InfoIntentExtras{
+    protected final String warnNotPositiveValueTextmenuActivity = getString(R.string.warnNotPositiveValueTextmenuActivity);
+    protected final String warnMoreThanAccaptableTextmenuActivity = getString(R.string.warnMoreThanAccaptableTextmenuActivity);
+    
     protected Info info;
     protected TextView bankStatus = findViewById(R.id.bankStatus);
     protected EditText sazkaCislo;
@@ -35,11 +38,11 @@ public class menuActivity extends AppCompatActivity implements InfoIntentExtras{
                 info.setSazka(Double.parseDouble(sazkaCislo.getText().toString()));
 
                 if (info.getSazka() < 0) {
-                    Toast.makeText(menuActivity.this, "Nemůžete vsadit nekladnou hodnotu.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(menuActivity.this, warnNotPositiveValueTextmenuActivity, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (info.getSazka() > info.getBank()) {
-                    Toast.makeText(menuActivity.this, "Vsázíte víc, než je váš stávající bank.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(menuActivity.this, warnMoreThanAccaptableTextmenuActivity, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
