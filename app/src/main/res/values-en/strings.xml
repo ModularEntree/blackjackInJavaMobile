@@ -15,4 +15,6 @@
     <string name="warnCannotHitOver21TextBlackJack">You\'re over 21, you would only lose more. Stand.</string>
     <string name="warnMoreThanAccaptableTextmenuActivity">You\'re betting more than you have on your ballance.</string>
     <string name="sazkaTextInfo">"Bet: "</string>
+    <string name="bankMenuText">Ballance</string>
+    <string name="aboutMenuText">About</string>
 </resources>

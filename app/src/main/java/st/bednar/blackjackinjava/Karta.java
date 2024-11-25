@@ -21,7 +21,7 @@ public class Karta {
     }
 
     static public Karta [] getBalicek(){
-        Karta [] balicek = new Karta[gameActivity.Blackjack.maxVelikostBalicku];
+        Karta [] balicek = new Karta[GameActivity.Blackjack.maxVelikostBalicku];
 
         balicek[0] = new Karta('A', 1);
         for (int i = 1; i < 10 ; i++) {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/blackjackMenu"
+        android:title="@string/blackjackMenuText"
+        android:icon="@drawable/playingcard" />
+    <item
+        android:id="@+id/bankMenu"
+        android:title="@string/bankMenuText"
+        android:icon="@drawable/bank" />
+    <item
+        android:id="@+id/aboutMenu"
+        android:title="@string/aboutMenuText"
+        android:icon="@drawable/about" />
+</menu>

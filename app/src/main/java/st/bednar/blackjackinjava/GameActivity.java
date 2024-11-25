@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
-public class gameActivity extends AppCompatActivity implements InfoIntentExtras {
+public class GameActivity extends NavigationActivity implements InfoIntentExtras {
     protected Info info;
     protected TextView bankStatus;
     protected TextView sazkaStatus;
@@ -247,7 +247,7 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(gameActivity.this, warnCannotDoubleTextBlackjack, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(GameActivity.this, warnCannotDoubleTextBlackjack, Toast.LENGTH_SHORT).show();
                                     }
                                 });
                         }
@@ -258,7 +258,7 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(gameActivity.this, warnCannotHitOver21TextBlackJack, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(GameActivity.this, warnCannotHitOver21TextBlackJack, Toast.LENGTH_SHORT).show();
                                     }
                                 });
                         }
@@ -275,7 +275,7 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(gameActivity.this, "Akce nevybrana?", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(GameActivity.this, "Akce nevybrana?", Toast.LENGTH_SHORT).show();
                                 }
                             });
                             break;

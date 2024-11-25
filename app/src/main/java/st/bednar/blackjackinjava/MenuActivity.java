@@ -14,7 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MenuActivity extends AppCompatActivity implements InfoIntentExtras {
+public class MenuActivity extends NavigationActivity implements InfoIntentExtras {
     protected String warnNotPositiveValueTextmenuActivity;
     protected String warnMoreThanAccaptableTextmenuActivity;
     protected Info info;
@@ -46,7 +46,7 @@ public class MenuActivity extends AppCompatActivity implements InfoIntentExtras 
         infoIfExists();
         setBank();
 
-        Intent toGame = new Intent(this, gameActivity.class);
+        Intent toGame = new Intent(this, GameActivity.class);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override

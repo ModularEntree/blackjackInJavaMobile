@@ -10,10 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Blackjack"
-        >
+        android:theme="@style/Theme.Blackjack">
         <activity
-            android:name=".gameActivity"
+            android:name=".NavigationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GameActivity"
             android:exported="false" />
         <activity
             android:name=".MenuActivity"
