@@ -20,6 +20,11 @@ public class BankActivity extends NavigationActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         setBottomNav(R.id.bankMenu);
     }
 }

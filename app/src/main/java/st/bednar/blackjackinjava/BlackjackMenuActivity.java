@@ -31,7 +31,6 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        setBottomNav(R.id.blackjackMenu);
 
         sazkaCisloView = findViewById(R.id.sazkaCislo);
 
@@ -68,7 +67,7 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
                 }
 
                 info.setSazka(sazkaCislo);
-                
+
                 toGame.putExtra("info", info);
                 startActivity(toGame);
             }
@@ -76,6 +75,11 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
 
         playButton.setOnClickListener(listener);
 
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setBottomNav(R.id.blackjackMenu);
     }
     @Override
     public void setBank() {
