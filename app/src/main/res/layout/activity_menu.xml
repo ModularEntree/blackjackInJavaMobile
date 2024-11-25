@@ -16,14 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <TextView
-            android:id="@+id/bankText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bankTextViewText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-        <TextView
             android:id="@+id/bankStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,14 +23,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
-
-        <TextView
-            android:id="@+id/bankMoney"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/moneyTypeTextViewText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
 

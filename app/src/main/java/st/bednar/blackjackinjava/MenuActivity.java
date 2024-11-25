@@ -1,7 +1,5 @@
 package st.bednar.blackjackinjava;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,10 +17,9 @@ import androidx.core.view.WindowInsetsCompat;
 public class MenuActivity extends AppCompatActivity implements InfoIntentExtras {
     protected String warnNotPositiveValueTextmenuActivity;
     protected String warnMoreThanAccaptableTextmenuActivity;
-
     protected Info info;
     protected TextView bankStatus;
-    protected EditText sazkaCislo;
+    protected EditText sazkaCisloView;
     protected Button playButton;
 
     @Override
@@ -36,9 +33,7 @@ public class MenuActivity extends AppCompatActivity implements InfoIntentExtras 
             return insets;
         });
 
-
-
-        sazkaCislo = findViewById(R.id.sazkaCislo);
+        sazkaCisloView = findViewById(R.id.sazkaCislo);
 
         playButton = findViewById(R.id.playButton);
 
@@ -48,7 +43,7 @@ public class MenuActivity extends AppCompatActivity implements InfoIntentExtras 
 
         warnNotPositiveValueTextmenuActivity = getString(R.string.warnNotPositiveValueTextmenuActivity);
 
-        infoIfExists( );
+        infoIfExists();
         setBank();
 
         Intent toGame = new Intent(this, gameActivity.class);
@@ -56,17 +51,24 @@ public class MenuActivity extends AppCompatActivity implements InfoIntentExtras 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                info.setSazka(Double.parseDouble(sazkaCislo.getText().toString()));
+                double sazkaCislo;
 
-                if (info.getSazka() < 0) {
+                if (sazkaCisloView.getText().toString().isEmpty())
+                    sazkaCislo = 100;
+                else
+                    sazkaCislo = Double.parseDouble(sazkaCisloView.getText().toString());
+
+                if (sazkaCislo < 0) {
                     Toast.makeText(MenuActivity.this, warnNotPositiveValueTextmenuActivity, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (info.getSazka() > info.getBank()) {
+                if (sazkaCislo > info.getBank()) {
                     Toast.makeText(MenuActivity.this, warnMoreThanAccaptableTextmenuActivity, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                info.setSazka(sazkaCislo);
+                
                 toGame.putExtra("info", info);
                 startActivity(toGame);
             }
@@ -78,7 +80,7 @@ public class MenuActivity extends AppCompatActivity implements InfoIntentExtras 
 
     @Override
     public void setBank() {
-        bankStatus.setText(Info.bankChange(info.getBank(), getString(R.string.ballanceTextInfo)));
+        bankStatus.setText(Info.bankChange(info.getBank(), getString(R.string.bankTextViewText), getString(R.string.moneyTypeTextViewText)));
     }
 
     @Override

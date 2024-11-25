@@ -115,7 +115,7 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                bankStatus.setText(Info.bankChange(info.getBank(), getString(R.string.ballanceTextInfo)));
+                bankStatus.setText(Info.bankChange(info.getBank(), getString(R.string.ballanceTextInfo), getString(R.string.moneyTypeTextViewText)));
             }
         });    }
 
@@ -180,12 +180,12 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
             do {
                 if (vzdalTo) break;
                 if (!lastRound) {
-                    for (int i = 0; i < 2; i++) {
+                    for (int i = 0; i < ((firstRoundPassed) ? 1 : 2 ); i++) {
                         validCardRes = validCard(balicek);
-                        casinoCards[i] = new Karta(balicek[validCardRes]);
+                        casinoCards[dealedCards(casinoCards)] = new Karta(balicek[validCardRes]);
 
                         validCardRes = validCard(balicek);
-                        playerCards[i] = new Karta(balicek[validCardRes]);
+                        playerCards[dealedCards(playerCards)] = new Karta(balicek[validCardRes]);
                     }
                 }
                 else if (sumHand(playerCards) > sumHand(casinoCards) && sumHand(playerCards) <= vyherniSum){
@@ -225,13 +225,6 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
 
                     setCardsDisplay(casinoCards, playerCards);
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(gameActivity.this, "????????", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
                     try {
                         wait.await();
                         Log.d("GameActivity", "Wait released, action: " + action);
@@ -252,7 +245,7 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
                                 });
                         }
                         case hitAction: {
-                            if (sumHand(playerCards) >= 21)
+                            if (sumHand(playerCards) <= 21)
                                 continue;
                             else
                                 runOnUiThread(new Runnable() {
@@ -284,6 +277,8 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
                 }
             }while(true);
 
+            setCardsDisplay(casinoCards, playerCards);
+
             toMenu.putExtra("info", info);
             startActivity(toMenu);
         }
@@ -313,6 +308,18 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
                     playerCardsView.setText(finalStringPlayer.toString());
                 }
             });
+        }
+
+        protected int dealedCards(Karta [] hand) {
+            int sum = 0;
+
+            for (int i = 0; i <= hand.length - 1; i++) {
+                if (hand[i] != null) {
+                    sum++;
+                }
+            }
+
+            return sum;
         }
 
         protected int sumHand(Karta [] hand) {

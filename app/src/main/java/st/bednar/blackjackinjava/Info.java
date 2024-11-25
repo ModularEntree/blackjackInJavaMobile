@@ -44,8 +44,8 @@ public class Info implements Parcelable {
         this.sazka = 0;
     }
 
-    static public String bankChange(double bank, String ballanceTextInfo) {
-        return ballanceTextInfo + bank + ",- Kč";
+    static public String bankChange(double bank, String ballanceTextInfo, String moneyTypeTextViewText) {
+        return ballanceTextInfo + bank + moneyTypeTextViewText;
     }
 
     public double getBank() {
