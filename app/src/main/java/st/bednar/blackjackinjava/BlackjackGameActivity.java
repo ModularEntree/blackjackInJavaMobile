@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -17,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
-public class GameActivity extends NavigationActivity implements InfoIntentExtras {
+public class BlackjackGameActivity extends NavigationActivity implements InfoIntentExtras {
     protected Info info;
     protected TextView bankStatus;
     protected TextView sazkaStatus;
@@ -58,7 +57,7 @@ public class GameActivity extends NavigationActivity implements InfoIntentExtras
         infoIfExists();
         setBank();
         setSazka();
-        toMenu = new Intent(this, MenuActivity.class);
+        toMenu = new Intent(this, BlackjackMenuActivity.class);
 
         wait = new CountDownLatch(1);
 
@@ -167,6 +166,7 @@ public class GameActivity extends NavigationActivity implements InfoIntentExtras
         private static final double blackjackRate = 0.5;
         private static final int doubleRate = 2;
 
+
         // Hra
         public void playGame() {
             Karta [] balicek = Karta.getBalicek();
@@ -182,7 +182,6 @@ public class GameActivity extends NavigationActivity implements InfoIntentExtras
             boolean lastRound = false;
 
             // HRA!
-
             do {
                 if (vzdalTo) break;
                 if (!lastRound) {
@@ -247,7 +246,7 @@ public class GameActivity extends NavigationActivity implements InfoIntentExtras
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(GameActivity.this, warnCannotDoubleTextBlackjack, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(BlackjackGameActivity.this, warnCannotDoubleTextBlackjack, Toast.LENGTH_SHORT).show();
                                     }
                                 });
                         }
@@ -258,7 +257,7 @@ public class GameActivity extends NavigationActivity implements InfoIntentExtras
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(GameActivity.this, warnCannotHitOver21TextBlackJack, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(BlackjackGameActivity.this, warnCannotHitOver21TextBlackJack, Toast.LENGTH_SHORT).show();
                                     }
                                 });
                         }
@@ -275,7 +274,7 @@ public class GameActivity extends NavigationActivity implements InfoIntentExtras
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(GameActivity.this, "Akce nevybrana?", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(BlackjackGameActivity.this, "Akce nevybrana?", Toast.LENGTH_SHORT).show();
                                 }
                             });
                             break;

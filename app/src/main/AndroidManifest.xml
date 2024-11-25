@@ -12,13 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Blackjack">
         <activity
+            android:name=".BankActivity"
+            android:exported="false" />
+        <activity
             android:name=".NavigationActivity"
             android:exported="false" />
         <activity
-            android:name=".GameActivity"
+            android:name=".BlackjackGameActivity"
             android:exported="false" />
         <activity
-            android:name=".MenuActivity"
+            android:name=".BlackjackMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -9,12 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MenuActivity extends NavigationActivity implements InfoIntentExtras {
+public class BlackjackMenuActivity extends NavigationActivity implements InfoIntentExtras {
     protected String warnNotPositiveValueTextmenuActivity;
     protected String warnMoreThanAccaptableTextmenuActivity;
     protected Info info;
@@ -32,6 +31,7 @@ public class MenuActivity extends NavigationActivity implements InfoIntentExtras
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        setBottomNav(R.id.blackjackMenu);
 
         sazkaCisloView = findViewById(R.id.sazkaCislo);
 
@@ -46,7 +46,7 @@ public class MenuActivity extends NavigationActivity implements InfoIntentExtras
         infoIfExists();
         setBank();
 
-        Intent toGame = new Intent(this, GameActivity.class);
+        Intent toGame = new Intent(this, BlackjackGameActivity.class);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -59,11 +59,11 @@ public class MenuActivity extends NavigationActivity implements InfoIntentExtras
                     sazkaCislo = Double.parseDouble(sazkaCisloView.getText().toString());
 
                 if (sazkaCislo < 0) {
-                    Toast.makeText(MenuActivity.this, warnNotPositiveValueTextmenuActivity, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BlackjackMenuActivity.this, warnNotPositiveValueTextmenuActivity, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (sazkaCislo > info.getBank()) {
-                    Toast.makeText(MenuActivity.this, warnMoreThanAccaptableTextmenuActivity, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BlackjackMenuActivity.this, warnMoreThanAccaptableTextmenuActivity, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
