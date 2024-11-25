@@ -77,7 +77,6 @@ public class MenuActivity extends AppCompatActivity implements InfoIntentExtras 
         playButton.setOnClickListener(listener);
 
     }
-
     @Override
     public void setBank() {
         bankStatus.setText(Info.bankChange(info.getBank(), getString(R.string.bankTextViewText), getString(R.string.moneyTypeTextViewText)));
