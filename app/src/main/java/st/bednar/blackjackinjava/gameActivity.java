@@ -1,7 +1,6 @@
 package st.bednar.blackjackinjava;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +20,7 @@ import java.util.concurrent.CountDownLatch;
 public class gameActivity extends AppCompatActivity implements InfoIntentExtras {
     protected Info info;
     protected TextView bankStatus;
+    protected TextView sazkaStatus;
     protected TextView casinoCardsView;
     protected TextView playerCardsView;
     protected Button buttonHit;
@@ -45,6 +45,7 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
         game = new Blackjack();
 
         bankStatus = findViewById(R.id.bankStatus);
+        sazkaStatus = findViewById(R.id.sazkaStatus);
 
         casinoCardsView = findViewById(R.id.casinoCards);
         playerCardsView = findViewById(R.id.playerCards);
@@ -54,11 +55,12 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
         buttonDouble = findViewById(R.id.doubleButton);
         buttonVzdat = findViewById(R.id.vzdatButton);
 
-        wait = new CountDownLatch(1);
-
         infoIfExists();
         setBank();
+        setSazka();
         toMenu = new Intent(this, MenuActivity.class);
+
+        wait = new CountDownLatch(1);
 
         new Thread(new Runnable() {
             @Override
@@ -73,7 +75,6 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
                 game.setAction(Blackjack.hitAction);
                 wait.countDown();
                 Log.d("GameActivity", "Hit action initiated. CountDown called.");
-
             }
         };
         View.OnClickListener standAct = new View.OnClickListener() {
@@ -110,6 +111,10 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
         buttonVzdat.setOnClickListener(vzdatAct);
     }
 
+    public void setSazka() {
+        sazkaStatus.setText(Info.sazkaChange(info.getSazka(), getString(R.string.sazkaTextInfo), getString(R.string.moneyTypeTextViewText)));
+    }
+
     @Override
     public void setBank() {
         runOnUiThread(new Runnable() {
@@ -117,7 +122,8 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
             public void run() {
                 bankStatus.setText(Info.bankChange(info.getBank(), getString(R.string.ballanceTextInfo), getString(R.string.moneyTypeTextViewText)));
             }
-        });    }
+        });
+    }
 
     @Override
     public void infoIfExists() {
@@ -182,10 +188,10 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
                 if (!lastRound) {
                     for (int i = 0; i < ((firstRoundPassed) ? 1 : 2 ); i++) {
                         validCardRes = validCard(balicek);
-                        casinoCards[dealedCards(casinoCards)] = new Karta(balicek[validCardRes]);
+                        casinoCards[cardsGiven] = new Karta(balicek[validCardRes]);
 
                         validCardRes = validCard(balicek);
-                        playerCards[dealedCards(playerCards)] = new Karta(balicek[validCardRes]);
+                        playerCards[cardsGiven] = new Karta(balicek[validCardRes]);
                     }
                 }
                 else if (sumHand(playerCards) > sumHand(casinoCards) && sumHand(playerCards) <= vyherniSum){
@@ -227,6 +233,7 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
 
                     try {
                         wait.await();
+                        wait = new CountDownLatch(1);
                         Log.d("GameActivity", "Wait released, action: " + action);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
@@ -274,6 +281,7 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
                             break;
                         }
                     }
+
                 }
             }while(true);
 
@@ -310,7 +318,7 @@ public class gameActivity extends AppCompatActivity implements InfoIntentExtras 
             });
         }
 
-        protected int dealedCards(Karta [] hand) {
+        protected int dealtCards(Karta [] hand) {
             int sum = 0;
 
             for (int i = 0; i <= hand.length - 1; i++) {

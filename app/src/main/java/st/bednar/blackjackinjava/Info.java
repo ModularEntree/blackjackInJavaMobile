@@ -47,6 +47,9 @@ public class Info implements Parcelable {
     static public String bankChange(double bank, String ballanceTextInfo, String moneyTypeTextViewText) {
         return ballanceTextInfo + bank + moneyTypeTextViewText;
     }
+    static public String sazkaChange(double bank, String sazkaTextInfo, String moneyTypeTextViewText) {
+        return sazkaTextInfo + bank + moneyTypeTextViewText;
+    }
 
     public double getBank() {
         return bank;
