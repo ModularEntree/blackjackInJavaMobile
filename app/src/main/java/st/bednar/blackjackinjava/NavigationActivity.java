@@ -51,6 +51,7 @@ public class NavigationActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(showUp);
     }
 
+    
 
     /*@Override
     protected void onCreate(Bundle savedInstanceState) {

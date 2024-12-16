@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/toolbarMenuDefItemSettings"
+        android:title="Nastavení"
+        android:icon="@drawable/settings"
+        />
+    <item
+        android:id="@+id/toolbarMenuDefItemSave"
+        android:title="Uložit"
+        android:icon="@drawable/save"
+        />
+</menu>
