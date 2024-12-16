@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -12,6 +14,7 @@ import com.google.android.material.navigation.NavigationBarView;
 public class NavigationActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNav;
+    Toolbar toolbar;
 
     protected void setBottomNav(int selectedItemId) {
         bottomNav = findViewById(R.id.bottomMenu);
@@ -37,6 +40,15 @@ public class NavigationActivity extends AppCompatActivity {
             }
         });
         bottomNav.setSelectedItemId(selectedItemId);
+    }
+    protected void setToolbar(String title, boolean showUp) {
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+
+        actionBar.setTitle(title);
+        actionBar.setDisplayHomeAsUpEnabled(showUp);
     }
 
 

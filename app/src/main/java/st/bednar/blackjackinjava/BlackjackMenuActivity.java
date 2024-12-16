@@ -31,6 +31,7 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        setToolbar("Hlavní menu", false);
 
         sazkaCisloView = findViewById(R.id.sazkaCislo);
 

@@ -13,13 +13,15 @@
         android:theme="@style/Theme.Blackjack">
         <activity
             android:name=".BankActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".BlackjackMenuActivity"/>
         <activity
             android:name=".NavigationActivity"
             android:exported="false" />
         <activity
             android:name=".BlackjackGameActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".BlackjackMenuActivity"
             android:exported="true">
