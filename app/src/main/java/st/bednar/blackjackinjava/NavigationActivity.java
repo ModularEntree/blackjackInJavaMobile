@@ -1,6 +1,7 @@
 package st.bednar.blackjackinjava;
 
 import android.content.Intent;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,23 @@ public class NavigationActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(showUp);
     }
 
-    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu_def, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemID = item.getItemId();
+
+        if (itemID == R.id.toolbarMenuDefItemSettings) {
+            // start activit
+        } else if (itemID == R.id.toolbarMenuDefItemSave) {
+            // start activity
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     /*@Override
     protected void onCreate(Bundle savedInstanceState) {
