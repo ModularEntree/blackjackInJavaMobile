@@ -2,6 +2,7 @@ package st.bednar.blackjackinjava;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +32,6 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        setToolbar("Hlavní menu", false);
 
         sazkaCisloView = findViewById(R.id.sazkaCislo);
 
@@ -45,6 +45,9 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
 
         infoIfExists();
         setBank();
+
+        //sazkaCisloView.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
+
 
         Intent toGame = new Intent(this, BlackjackGameActivity.class);
 
@@ -81,6 +84,7 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
     protected void onResume() {
         super.onResume();
         setBottomNav(R.id.blackjackMenu);
+        setToolbar("Hlavní menu", false);
     }
     @Override
     public void setBank() {
@@ -90,11 +94,21 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
     @Override
     public void infoIfExists() {
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            info = extras.getParcelable("info");
+        Log.d("Info problém", "Prošel infem");
+        if (extras != null && extras.containsKey("info")) {
+            this.info = extras.getParcelable("info");
+            Log.d("Info problém", "Pokus o načtení infa");
+            if (info == null) {
+                this.info = new Info();
+                Log.d("Info problém", "Pokus selhal");
+            }
+            else {
+                Log.d("Info problém", "Pokus vyšel");
+            }
         }
         else {
-            info = new Info();
+            this.info = new Info();
+            Log.d("Info problém", "Nové info vytvořeno");
         }
     }
 }

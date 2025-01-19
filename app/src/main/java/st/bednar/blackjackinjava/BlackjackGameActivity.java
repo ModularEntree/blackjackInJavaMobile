@@ -127,12 +127,27 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
     @Override
     public void infoIfExists() {
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            info = extras.getParcelable("info");
+        Log.d("Info problém", "Prošel infem");
+        if (extras != null && extras.containsKey("info")) {
+            this.info = extras.getParcelable("info");
+            Log.d("Info problém", "Pokus o načtení infa");
+            if (info == null) {
+                this.info = new Info();
+                Log.d("Info problém", "Pokus selhal");
+            }
+            else {
+                Log.d("Info problém", "Pokus vyšel");
+            }
         }
         else {
-            info = new Info();
+            this.info = new Info();
+            Log.d("Info problém", "Nové info vytvořeno");
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     protected class Blackjack {

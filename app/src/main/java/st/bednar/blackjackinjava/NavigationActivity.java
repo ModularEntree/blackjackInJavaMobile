@@ -28,11 +28,11 @@ public class NavigationActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
-                if (itemId == R.id.blackjackMenu) {
+                if (itemId == R.id.blackjackMenu && !(NavigationActivity.this instanceof BlackjackMenuActivity)) {
                     startActivity(toBlackjack);
-                } else if (itemId == R.id.bankMenu) {
+                } else if (itemId == R.id.bankMenu && !(NavigationActivity.this instanceof BankActivity)) {
                     startActivity(toBank);
-                } else if (itemId == R.id.aboutMenu) {
+                } else if (itemId == R.id.aboutMenu && !(NavigationActivity.this instanceof AboutActivity)) {
                     startActivity(toAbout);
                 } else {
                     return false;
