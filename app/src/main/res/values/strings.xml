@@ -21,4 +21,8 @@
     <string name="blackjackMenuText" translatable="false">Blackjack</string>
     <string name="bankMenuText">Bank</string>
     <string name="aboutMenuText">O aplikaci</string>
+    <string name="BlackjackMenuActivityName">Blackjack menu</string>
+    <string name="BlackjackGameActivityName">Hra blackjacku</string>
+    <string name="AboutActivityName">O nás</string>
+    <string name="BankActivityName">Informace o banku</string>
 </resources>

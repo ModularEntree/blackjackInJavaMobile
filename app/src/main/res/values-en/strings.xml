@@ -17,4 +17,8 @@
     <string name="sazkaTextInfo">"Bet: "</string>
     <string name="bankMenuText">Ballance</string>
     <string name="aboutMenuText">About</string>
+    <string name="BlackjackMenuActivityName">Blackjack Menu</string>
+    <string name="BlackjackGameActivityName">Game of Blackjack</string>
+    <string name="AboutActivityName">About Us</string>
+    <string name="BankActivityName">Ballance Info</string>
 </resources>

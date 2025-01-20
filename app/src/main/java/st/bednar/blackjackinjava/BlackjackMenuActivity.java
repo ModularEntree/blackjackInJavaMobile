@@ -33,6 +33,9 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
             return insets;
         });
 
+        setBottomNav(R.id.blackjackMenu);
+        setToolbar(getString(R.string.BlackjackMenuActivityName), false);
+
         sazkaCisloView = findViewById(R.id.sazkaCislo);
 
         playButton = findViewById(R.id.playButton);
@@ -84,7 +87,7 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
     protected void onResume() {
         super.onResume();
         setBottomNav(R.id.blackjackMenu);
-        setToolbar("Hlavní menu", false);
+        setToolbar(getString(R.string.BlackjackMenuActivityName), false);
     }
     @Override
     public void setBank() {

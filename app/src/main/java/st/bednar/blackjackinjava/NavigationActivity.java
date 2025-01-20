@@ -20,6 +20,8 @@ public class NavigationActivity extends AppCompatActivity {
     protected void setBottomNav(int selectedItemId) {
         bottomNav = findViewById(R.id.bottomMenu);
 
+        bottomNav.setSelectedItemId(selectedItemId);
+
         Intent toBlackjack = new Intent(this, BlackjackMenuActivity.class);
         Intent toBank = new Intent(this, BankActivity.class);
         Intent toAbout = new Intent(this, AboutActivity.class);
@@ -40,7 +42,6 @@ public class NavigationActivity extends AppCompatActivity {
                 return true;
             }
         });
-        bottomNav.setSelectedItemId(selectedItemId);
     }
     protected void setToolbar(String title, boolean showUp) {
         toolbar = findViewById(R.id.toolbar);
