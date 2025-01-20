@@ -22,15 +22,12 @@ public class AboutActivity extends NavigationActivity {
         });
 
         setBottomNav(R.id.aboutMenu);
-        setToolbar(getString(R.string.AboutActivityName), false);
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         setBottomNav(R.id.aboutMenu);
-        setToolbar(getString(R.string.AboutActivityName), false);
     }
 
 

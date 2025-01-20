@@ -45,7 +45,13 @@ public class BankActivity extends NavigationActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemID = item.getItemId();
 
-        if (itemID == R.id.toolbarMenuBankReset)
+        if (itemID == R.id.toolbarMenuBankReset) {
+            // Tu se bude resetovat info bank
+            return true;
+        } else if (itemID == R.id.toolbarMenuBankSafeProgress) {
+            // Až se bude ukládat pogress
+            return true;
+        }
 
         return true;
     }

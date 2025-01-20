@@ -49,9 +49,12 @@ public class NavigationActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
-
-        actionBar.setTitle(title);
-        actionBar.setDisplayHomeAsUpEnabled(showUp);
+        try {
+            actionBar.setTitle(title);
+            actionBar.setDisplayHomeAsUpEnabled(showUp);
+        } catch (NullPointerException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
