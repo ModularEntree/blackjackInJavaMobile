@@ -3,12 +3,15 @@ package st.bednar.blackjackinjava;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -40,6 +43,8 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        setToolbar(getString(R.string.BlackjackGameActivityName), true);
 
         game = new Blackjack();
 
@@ -148,6 +153,33 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
     @Override
     protected void onResume() {
         super.onResume();
+        setToolbar(getString(R.string.BlackjackGameActivityName), true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu_blackjack, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemID = item.getItemId();
+
+        if (itemID == R.id.toolbarMenuBlackjackGiveUp) {
+            Toast.makeText(this, "Odchod ze hry se počítá jako prohra!", Toast.LENGTH_SHORT).show();
+            game.endOfGameOutsideOfGameloop(Blackjack.lose);
+            return true;
+        } else if (itemID == R.id.toolbarMenuBlackjackItemOutcomes) {
+            Toast.makeText(this, "Možná výhra/prohra: " + ((game.isDoubleWinSet()) ? game.calcNewBank(Blackjack.winDouble) : game.calcNewBank(Blackjack.win)) + "/" + ((game.isDoubleWinSet()) ? game.calcNewBank(Blackjack.loseDouble) : game.calcNewBank(Blackjack.lose)), Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (itemID == android.R.id.home) {
+            Toast.makeText(this, "Odchod ze hry se počítá jako prohra!", Toast.LENGTH_SHORT).show();
+            game.endOfGameOutsideOfGameloop(Blackjack.lose);
+            return true;
+        }
+
+        return true;
     }
 
     protected class Blackjack {
@@ -162,6 +194,7 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
 
         // Herní input
 
+        private boolean doubleWinSet;
         private int action;
 
         // Herní konstanty inputů
@@ -192,7 +225,7 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
             int validCardRes;
             boolean firstRoundPassed = false;
             int cardsGiven = 0;
-            boolean doubleWin = false;
+            doubleWinSet = false;
             boolean vzdalTo = false;
             boolean lastRound = false;
 
@@ -222,21 +255,21 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
 
                 if (firstRoundPassed) {
                     if (cardsGiven == 2 && sumHand(playerCards) == vyherniSum) {
-                        calcNewBank(blackjack);
+                        calcNewBankAndSet(blackjack);
                         break;
                     }
 
                     if (lastRound) {
                         if (sumHand(playerCards) < sumHand(casinoCards)) {
-                            if ((doubleWin))
-                                calcNewBank(winDouble);
+                            if ((doubleWinSet))
+                                calcNewBankAndSet(winDouble);
                             else
-                                calcNewBank(win);
+                                calcNewBankAndSet(win);
                         } else {
-                            if ((doubleWin))
-                                calcNewBank(loseDouble);
+                            if ((doubleWinSet))
+                                calcNewBankAndSet(loseDouble);
                             else
-                                calcNewBank(lose);
+                                calcNewBankAndSet(lose);
                         }
                         break;
                     }
@@ -256,7 +289,7 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
                     switch (action) {
                         case doubleAction: {
                             if (cardsGiven <= 2)
-                                doubleWin = true;
+                                doubleWinSet = true;
                             else
                                 runOnUiThread(new Runnable() {
                                     @Override
@@ -282,7 +315,7 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
                         }
                         case vzdatAction: {
                             vzdalTo = true;
-                            calcNewBank(lose);
+                            calcNewBankAndSet(lose);
                             break;
                         }
                         default: {
@@ -301,6 +334,12 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
 
             setCardsDisplay(casinoCards, playerCards);
 
+            toMenu.putExtra("info", info);
+            startActivity(toMenu);
+        }
+
+        public void endOfGameOutsideOfGameloop(int status) {
+            calcNewBankAndSet(status);
             toMenu.putExtra("info", info);
             startActivity(toMenu);
         }
@@ -369,7 +408,7 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
             return randomNumber;
         }
 
-        protected void calcNewBank(int status) {
+        protected void calcNewBankAndSet(int status) {
             switch (status) {
                 case blackjack : {
                     info.setBank(info.getBank() + info.getSazka()*blackjackRate);
@@ -397,8 +436,35 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
             }
         }
 
+        protected double calcNewBank(int status) {
+            switch (status) {
+                case blackjack : {
+                    return info.getBank() + info.getSazka()*blackjackRate;
+                }
+                case win : {
+                    return info.getBank() + info.getSazka();
+                }
+                case lose : {
+                    return info.getBank() - info.getSazka();
+                }
+                case winDouble : {
+                    return info.getBank() + info.getSazka()*doubleRate;
+                }
+                case loseDouble : {
+                    return info.getBank() - info.getSazka()*doubleRate;
+                }
+                default: {
+                    throw new IllegalArgumentException("Byl zadán nesmyslný výpočet");
+                }
+            }
+        }
+
         public void setAction(int action) {
             this.action = action;
+        }
+
+        public boolean isDoubleWinSet() {
+            return doubleWinSet;
         }
     }
 }

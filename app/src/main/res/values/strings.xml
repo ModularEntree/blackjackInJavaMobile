@@ -25,4 +25,11 @@
     <string name="BlackjackGameActivityName">Hra blackjacku</string>
     <string name="AboutActivityName">O nás</string>
     <string name="BankActivityName">Informace o banku</string>
+    <string name="toolbarMenuBankResetText">Vyresetovat bank</string>
+    <string name="toolbarMenuDefSayHelloText">Pozdrav!</string>
+    <string name="toolbarMenuDefVersionText">Verze</string>
+    <string name="toolbarMenuBlackjackGiveUpText">Vzdát se</string>
+    <string name="toolbarMenuBlackjackItemOutcomesText">Bank po výhře/prohře</string>
+    <string name="app_version">0.0.1</string>
+    <string name="toolbarMenuBankSafeProgressText">Uložit</string>
 </resources>

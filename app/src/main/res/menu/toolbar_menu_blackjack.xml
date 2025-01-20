@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/toolbarMenuBlackjackItemSave"
-        android:title="Uložit"
-        android:icon="@drawable/save"
-        app:showAsAction="ifRoom"
+        android:id="@+id/toolbarMenuBlackjackGiveUp"
+        android:title="@string/toolbarMenuBlackjackGiveUpText"
+        android:icon="@drawable/give_up"
+        app:showAsAction="never"
         />
     <item
-        android:id="@+id/toolbarMenuBlackjackItemSettings"
-        android:title="Nastavení"
-        android:icon="@drawable/settings"
+        android:id="@+id/toolbarMenuBlackjackItemOutcomes"
+        android:title="@string/toolbarMenuBlackjackItemOutcomesText"
+        android:icon="@drawable/outcomes"
         app:showAsAction="never"
         />
 </menu>

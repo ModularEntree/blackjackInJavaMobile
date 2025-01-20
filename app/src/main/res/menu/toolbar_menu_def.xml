@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/toolbarMenuDefItemSettings"
-        android:title="Nastavení"
-        android:icon="@drawable/settings"
+        android:id="@+id/toolbarMenuDefSayHello"
+        android:title="@string/toolbarMenuDefSayHelloText"
+        android:icon="@drawable/hello"
+        app:showAsAction="ifRoom"
         />
     <item
-        android:id="@+id/toolbarMenuDefItemSave"
-        android:title="Uložit"
-        android:icon="@drawable/save"
+        android:id="@+id/toolbarMenuDefVersion"
+        android:title="@string/toolbarMenuDefVersionText"
+        android:icon="@drawable/version"
+        app:showAsAction="ifRoom"
         />
 </menu>
