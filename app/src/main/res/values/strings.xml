@@ -30,6 +30,11 @@
     <string name="toolbarMenuDefVersionText">Verze</string>
     <string name="toolbarMenuBlackjackGiveUpText">Vzdát se</string>
     <string name="toolbarMenuBlackjackItemOutcomesText">Bank po výhře/prohře</string>
-    <string name="app_version">0.0.1</string>
+    <string name="app_version" translatable="false">0.0.1</string>
     <string name="toolbarMenuBankSafeProgressText">Uložit</string>
+    <string name="toolbarMenuBlackjackGameActivityGiveUpText">Odchod ze hry se počítá jako prohra!</string>
+    <string name="toolbarMenuBlackjackGameActivityOutcomesText">"Možná výhra/prohra: "</string>
+    <string name="toolbarMenuBlackjackGameActivityLeaveText">Odchod ze hry se počítá jako prohra!</string>
+    <string name="toolbarMenuDefActivitySayHelloText">Ahoooooj!</string>
+    <string name="toolbarMenuDefActivityVersionText">", verze "</string>
 </resources>

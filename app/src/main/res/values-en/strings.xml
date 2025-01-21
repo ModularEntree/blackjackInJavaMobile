@@ -21,4 +21,15 @@
     <string name="BlackjackGameActivityName">Game of Blackjack</string>
     <string name="AboutActivityName">About Us</string>
     <string name="BankActivityName">Ballance Info</string>
+    <string name="toolbarMenuBankResetText">Reset ballance</string>
+    <string name="toolbarMenuDefSayHelloText">Say hello!</string>
+    <string name="toolbarMenuDefVersionText">Version</string>
+    <string name="toolbarMenuBlackjackGiveUpText">Give up</string>
+    <string name="toolbarMenuBlackjackItemOutcomesText">Ballance after win/lose</string>
+    <string name="toolbarMenuBankSafeProgressText">Save</string>
+    <string name="toolbarMenuBlackjackGameActivityGiveUpText">Leaving the game counts as losing!</string>
+    <string name="toolbarMenuBlackjackGameActivityOutcomesText">Possible outcomes:</string>
+    <string name="toolbarMenuBlackjackGameActivityLeaveText">Leaving the game counts as losing!</string>
+    <string name="toolbarMenuDefActivitySayHelloText">Hellooooo!</string>
+    <string name="toolbarMenuDefActivityVersionText">, version</string>
 </resources>

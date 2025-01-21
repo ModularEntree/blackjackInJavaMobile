@@ -167,14 +167,14 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
         int itemID = item.getItemId();
 
         if (itemID == R.id.toolbarMenuBlackjackGiveUp) {
-            Toast.makeText(this, "Odchod ze hry se počítá jako prohra!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toolbarMenuBlackjackGameActivityGiveUpText), Toast.LENGTH_SHORT).show();
             game.endOfGameOutsideOfGameloop(Blackjack.lose);
             return true;
         } else if (itemID == R.id.toolbarMenuBlackjackItemOutcomes) {
-            Toast.makeText(this, "Možná výhra/prohra: " + ((game.isDoubleWinSet()) ? game.calcNewBank(Blackjack.winDouble) : game.calcNewBank(Blackjack.win)) + "/" + ((game.isDoubleWinSet()) ? game.calcNewBank(Blackjack.loseDouble) : game.calcNewBank(Blackjack.lose)), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toolbarMenuBlackjackGameActivityOutcomesText) + ((game.isDoubleWinSet()) ? game.calcNewBank(Blackjack.winDouble) : game.calcNewBank(Blackjack.win)) + "/" + ((game.isDoubleWinSet()) ? game.calcNewBank(Blackjack.loseDouble) : game.calcNewBank(Blackjack.lose)), Toast.LENGTH_SHORT).show();
             return true;
         } else if (itemID == android.R.id.home) {
-            Toast.makeText(this, "Odchod ze hry se počítá jako prohra!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toolbarMenuBlackjackGameActivityLeaveText), Toast.LENGTH_SHORT).show();
             game.endOfGameOutsideOfGameloop(Blackjack.lose);
             return true;
         }
