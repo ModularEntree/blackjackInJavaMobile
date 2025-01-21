@@ -31,5 +31,5 @@
     <string name="toolbarMenuBlackjackGameActivityOutcomesText">Possible outcomes:</string>
     <string name="toolbarMenuBlackjackGameActivityLeaveText">Leaving the game counts as losing!</string>
     <string name="toolbarMenuDefActivitySayHelloText">Hellooooo!</string>
-    <string name="toolbarMenuDefActivityVersionText">, version</string>
+    <string name="toolbarMenuDefActivityVersionText">version</string>
 </resources>

@@ -71,7 +71,7 @@ public class NavigationActivity extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.toolbarMenuDefActivitySayHelloText), Toast.LENGTH_SHORT).show();
             return true;
         } else if (itemID == R.id.toolbarMenuDefVersion) {
-            Toast.makeText(this, getString(R.string.app_name) + getString(R.string.toolbarMenuDefActivityVersionText) + getString(R.string.app_version), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.app_name) + ", " + getString(R.string.toolbarMenuDefActivityVersionText) + " " + getString(R.string.app_version), Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
