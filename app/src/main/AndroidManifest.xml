@@ -11,6 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Blackjack">
         <activity
+            android:name=".BankSettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".BankActivity"/>
+        <activity
             android:name=".BankActivity"
             android:exported="false" />
         <activity
@@ -21,9 +25,8 @@
             android:exported="false" />
         <activity
             android:name=".BlackjackGameActivity"
-            android:parentActivityName=".BlackjackMenuActivity"
             android:exported="false"
-            />
+            android:parentActivityName=".BlackjackMenuActivity" />
         <activity
             android:name=".BlackjackMenuActivity"
             android:exported="true">

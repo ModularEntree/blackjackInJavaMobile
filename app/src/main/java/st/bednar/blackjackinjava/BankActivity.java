@@ -26,6 +26,8 @@ public class BankActivity extends NavigationActivity {
 
         setBottomNav(R.id.bankMenu);
         setToolbar(getString(R.string.BankActivityName), false);
+
+
     }
 
     @Override
