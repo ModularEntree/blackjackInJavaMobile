@@ -11,6 +11,13 @@ Pokus o vyhotovení aplikace s využitím herních mechanik karetní hry Blackja
 - [ ] Upravit xml na změnu savebets
 - [ ] Obecně zprovoznit savebets
 - [ ] Shared preferences pro savebet
+- [ ] odkázat na banksettings activity
+
+### BankActivity Settings
+- [ ] savebet založit
+- [ ] zprovoznit toolbar
+- [ ] implementovat implement
+- [ ] úvod v oncreate opravit?
 
 ### Blackjack
 - [ ] Opravit gameloopu v Blackjacku
