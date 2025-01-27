@@ -400,7 +400,7 @@ public class BlackjackGameActivity extends NavigationActivity implements Gambler
             int randomNumber;
             // Náhodně volí karty, které se ještě vyskytují v balíčku
             do {
-                randomNumber = rand.nextInt(maxVelikostBalicku - 1);
+                randomNumber = rand.nextInt(maxVelikostBalicku);                                    // resolved thanks to issue on github by Martufa, thanks a lot :3
             } while (balicek[randomNumber].pouzito);
 
             balicek[randomNumber].pouzito = true;

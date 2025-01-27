@@ -84,7 +84,7 @@ public class BlackjackMenuActivity extends NavigationActivity implements Gambler
 
                 gamblerStats.setSazka(sazkaCislo);
 
-                toGame.putExtra("info", gamblerStats);
+                toGame.putExtra(GamblerStats.gamblerStatsString, gamblerStats);
                 startActivity(toGame);
             }
         };
@@ -107,7 +107,7 @@ public class BlackjackMenuActivity extends NavigationActivity implements Gambler
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        gamblerStats = savedInstanceState.getParcelable("info");
+        gamblerStats = savedInstanceState.getParcelable(GamblerStats.gamblerStatsString);
         super.onRestoreInstanceState(savedInstanceState);
     }
 
@@ -120,8 +120,8 @@ public class BlackjackMenuActivity extends NavigationActivity implements Gambler
     public void infoIfExists() {
         Bundle extras = getIntent().getExtras();
         Log.d("Info problém", "Prošel infem");
-        if (extras != null && extras.containsKey("info")) {
-            this.gamblerStats = extras.getParcelable("info");
+        if (extras != null && extras.containsKey(GamblerStats.gamblerStatsString)) {
+            this.gamblerStats = extras.getParcelable(GamblerStats.gamblerStatsString);
             Log.d("Info problém", "Pokus o načtení infa");
             if (gamblerStats == null) {
                 this.gamblerStats = new GamblerStats();

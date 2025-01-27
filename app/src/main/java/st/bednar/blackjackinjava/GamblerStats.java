@@ -74,4 +74,7 @@ public class GamblerStats implements Parcelable {
     public double getMaxSaveBet() {
         return maxSaveBet;
     }
+    public void setMaxSaveBet(double maxSaveBet) {
+        this.maxSaveBet = maxSaveBet;
+    }
 }
