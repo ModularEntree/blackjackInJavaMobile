@@ -1,13 +1,29 @@
 # Blackjack in Java on mobile
 Pokus o vyhotovení aplikace s využitím herních mechanik karetní hry Blackjack. 
 **TODO:**
-- [x] Aktualizovat README
+### Navigace
+
 - [x] Dodělat Bottom navigaci
 - [x] Dodělat toolbar
-- [ ] Vyhotovit ukládání infa v souboru
-- [ ] Opravit gameloopu v Blackjacku
-- [ ] Dát aspoň něco do těch aktivit
-- [ ] Převést herní smyčku na metody a onlistenery
-- [ ] Vyhotovit jiné aktivity
-- [ ] Nastavení ikonky, jména aplikace
 
+### Bank
+- [ ] Vyhotovit ukládání gamblerStats v souboru
+- [ ] Upravit xml na změnu savebets
+- [ ] Obecně zprovoznit savebets
+- [ ] Shared preferences pro savebet
+
+### Blackjack
+- [ ] Opravit gameloopu v Blackjacku
+- [ ] Převést herní smyčku na metody a onlistenery
+- [ ] zprovoznit savebets ve hře u doublu
+
+### Aplikace jako taková
+- [ ] Nastavení ikonky
+- [x] Nastavení jména aplikace
+
+### Aktivity
+- [ ] Vyhotovit jiné aktivity
+- [ ] Dát aspoň něco do těch aktivit
+
+### MimoAplikační zbytečnosti
+- [x] Aktualizovat README
