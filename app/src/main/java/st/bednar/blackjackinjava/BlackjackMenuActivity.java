@@ -2,6 +2,7 @@ package st.bednar.blackjackinjava;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,14 +11,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class BlackjackMenuActivity extends NavigationActivity implements InfoIntentExtras {
+public class BlackjackMenuActivity extends NavigationActivity implements GamblerStatsIntentExtras {
     protected String warnNotPositiveValueTextmenuActivity;
     protected String warnMoreThanAccaptableTextmenuActivity;
-    protected Info info;
+    protected String warnMoreThanSaveBet;
+    protected GamblerStats gamblerStats;
     protected TextView bankStatus;
     protected EditText sazkaCisloView;
     protected Button playButton;
@@ -44,6 +47,8 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
 
         warnMoreThanAccaptableTextmenuActivity = getString(R.string.warnMoreThanAccaptableTextmenuActivity);
 
+        warnMoreThanSaveBet = getString(R.string.warnMoreThanSaveBet);
+
         warnNotPositiveValueTextmenuActivity = getString(R.string.warnNotPositiveValueTextmenuActivity);
 
         infoIfExists();
@@ -68,14 +73,18 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
                     Toast.makeText(BlackjackMenuActivity.this, warnNotPositiveValueTextmenuActivity, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (sazkaCislo > info.getBank()) {
+                if (sazkaCislo > gamblerStats.getBank()) {
                     Toast.makeText(BlackjackMenuActivity.this, warnMoreThanAccaptableTextmenuActivity, Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if (sazkaCislo > gamblerStats.getMaxSaveBet()) {
+                    Toast.makeText(BlackjackMenuActivity.this, warnMoreThanSaveBet, Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                info.setSazka(sazkaCislo);
+                gamblerStats.setSazka(sazkaCislo);
 
-                toGame.putExtra("info", info);
+                toGame.putExtra("info", gamblerStats);
                 startActivity(toGame);
             }
         };
@@ -89,9 +98,22 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
         setBottomNav(R.id.blackjackMenu);
         setToolbar(getString(R.string.BlackjackMenuActivityName), false);
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        outState.putParcelable(GamblerStats.gamblerStatsString, gamblerStats);
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        gamblerStats = savedInstanceState.getParcelable("info");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
     @Override
     public void setBank() {
-        bankStatus.setText(Info.bankChange(info.getBank(), getString(R.string.bankTextViewText), getString(R.string.moneyTypeTextViewText)));
+        bankStatus.setText(GamblerStats.bankChange(gamblerStats.getBank(), getString(R.string.bankTextViewText), getString(R.string.moneyTypeTextViewText)));
     }
 
     @Override
@@ -99,10 +121,10 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
         Bundle extras = getIntent().getExtras();
         Log.d("Info problém", "Prošel infem");
         if (extras != null && extras.containsKey("info")) {
-            this.info = extras.getParcelable("info");
+            this.gamblerStats = extras.getParcelable("info");
             Log.d("Info problém", "Pokus o načtení infa");
-            if (info == null) {
-                this.info = new Info();
+            if (gamblerStats == null) {
+                this.gamblerStats = new GamblerStats();
                 Log.d("Info problém", "Pokus selhal");
             }
             else {
@@ -110,7 +132,7 @@ public class BlackjackMenuActivity extends NavigationActivity implements InfoInt
             }
         }
         else {
-            this.info = new Info();
+            this.gamblerStats = new GamblerStats();
             Log.d("Info problém", "Nové info vytvořeno");
         }
     }

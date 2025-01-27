@@ -19,8 +19,8 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
-public class BlackjackGameActivity extends NavigationActivity implements InfoIntentExtras {
-    protected Info info;
+public class BlackjackGameActivity extends NavigationActivity implements GamblerStatsIntentExtras {
+    protected GamblerStats gamblerStats;
     protected TextView bankStatus;
     protected TextView sazkaStatus;
     protected TextView casinoCardsView;
@@ -116,7 +116,7 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
     }
 
     public void setSazka() {
-        sazkaStatus.setText(Info.sazkaChange(info.getSazka(), getString(R.string.sazkaTextInfo), getString(R.string.moneyTypeTextViewText)));
+        sazkaStatus.setText(GamblerStats.sazkaChange(gamblerStats.getSazka(), getString(R.string.sazkaTextInfo), getString(R.string.moneyTypeTextViewText)));
     }
 
     @Override
@@ -124,7 +124,7 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                bankStatus.setText(Info.bankChange(info.getBank(), getString(R.string.ballanceTextInfo), getString(R.string.moneyTypeTextViewText)));
+                bankStatus.setText(GamblerStats.bankChange(gamblerStats.getBank(), getString(R.string.ballanceTextInfo), getString(R.string.moneyTypeTextViewText)));
             }
         });
     }
@@ -134,10 +134,10 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
         Bundle extras = getIntent().getExtras();
         Log.d("Info problém", "Prošel infem");
         if (extras != null && extras.containsKey("info")) {
-            this.info = extras.getParcelable("info");
+            this.gamblerStats = extras.getParcelable("info");
             Log.d("Info problém", "Pokus o načtení infa");
-            if (info == null) {
-                this.info = new Info();
+            if (gamblerStats == null) {
+                this.gamblerStats = new GamblerStats();
                 Log.d("Info problém", "Pokus selhal");
             }
             else {
@@ -145,7 +145,7 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
             }
         }
         else {
-            this.info = new Info();
+            this.gamblerStats = new GamblerStats();
             Log.d("Info problém", "Nové info vytvořeno");
         }
     }
@@ -334,13 +334,13 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
 
             setCardsDisplay(casinoCards, playerCards);
 
-            toMenu.putExtra("info", info);
+            toMenu.putExtra("info", gamblerStats);
             startActivity(toMenu);
         }
 
         public void endOfGameOutsideOfGameloop(int status) {
             calcNewBankAndSet(status);
-            toMenu.putExtra("info", info);
+            toMenu.putExtra("info", gamblerStats);
             startActivity(toMenu);
         }
 
@@ -411,23 +411,23 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
         protected void calcNewBankAndSet(int status) {
             switch (status) {
                 case blackjack : {
-                    info.setBank(info.getBank() + info.getSazka()*blackjackRate);
+                    gamblerStats.setBank(gamblerStats.getBank() + gamblerStats.getSazka()*blackjackRate);
                     break;
                 }
                 case win : {
-                    info.setBank(info.getBank() + info.getSazka());
+                    gamblerStats.setBank(gamblerStats.getBank() + gamblerStats.getSazka());
                     break;
                 }
                 case lose : {
-                    info.setBank(info.getBank() - info.getSazka());
+                    gamblerStats.setBank(gamblerStats.getBank() - gamblerStats.getSazka());
                     break;
                 }
                 case winDouble : {
-                    info.setBank(info.getBank() + info.getSazka()*doubleRate);
+                    gamblerStats.setBank(gamblerStats.getBank() + gamblerStats.getSazka()*doubleRate);
                     break;
                 }
                 case loseDouble : {
-                    info.setBank(info.getBank() - info.getSazka()*doubleRate);
+                    gamblerStats.setBank(gamblerStats.getBank() - gamblerStats.getSazka()*doubleRate);
                     break;
                 }
                 default: {
@@ -439,19 +439,19 @@ public class BlackjackGameActivity extends NavigationActivity implements InfoInt
         protected double calcNewBank(int status) {
             switch (status) {
                 case blackjack : {
-                    return info.getBank() + info.getSazka()*blackjackRate;
+                    return gamblerStats.getBank() + gamblerStats.getSazka()*blackjackRate;
                 }
                 case win : {
-                    return info.getBank() + info.getSazka();
+                    return gamblerStats.getBank() + gamblerStats.getSazka();
                 }
                 case lose : {
-                    return info.getBank() - info.getSazka();
+                    return gamblerStats.getBank() - gamblerStats.getSazka();
                 }
                 case winDouble : {
-                    return info.getBank() + info.getSazka()*doubleRate;
+                    return gamblerStats.getBank() + gamblerStats.getSazka()*doubleRate;
                 }
                 case loseDouble : {
-                    return info.getBank() - info.getSazka()*doubleRate;
+                    return gamblerStats.getBank() - gamblerStats.getSazka()*doubleRate;
                 }
                 default: {
                     throw new IllegalArgumentException("Byl zadán nesmyslný výpočet");

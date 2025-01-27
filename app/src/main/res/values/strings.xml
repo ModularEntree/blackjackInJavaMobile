@@ -37,4 +37,5 @@
     <string name="toolbarMenuBlackjackGameActivityLeaveText">Odchod ze hry se počítá jako prohra!</string>
     <string name="toolbarMenuDefActivitySayHelloText">Ahoooooj!</string>
     <string name="toolbarMenuDefActivityVersionText">verze</string>
+    <string name="warnMoreThanSaveBet">Vsázíte nad limitu vaší bezpečné sázky. Pro změnu se podívejte do karty Banku.</string>
 </resources>
