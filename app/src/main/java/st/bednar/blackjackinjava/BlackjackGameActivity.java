@@ -184,8 +184,10 @@ public class BlackjackGameActivity extends NavigationActivity implements Gambler
 
     protected class Blackjack {
         // Toast messages
-        protected final String warnCannotDoubleTextBlackjack = getString(R.string.warnCannotDoubleTextBlackjack);
-        private final String warnCannotHitOver21TextBlackJack = getString(R.string.warnCannotHitOver21TextBlackJack);
+        protected final String warnCannotDoubleTextBlackjack;
+        private final String warnCannotHitOver21TextBlackJack;
+        private final String warnMoreThanAccaptableTextmenuActivity;
+        private final String warnMoreThanSaveBet;
 
         // Herní konstanty
         private static final int maxVelikostRuky = 7;
@@ -214,6 +216,15 @@ public class BlackjackGameActivity extends NavigationActivity implements Gambler
         private static final double blackjackRate = 0.5;
         private static final int doubleRate = 2;
 
+        public Blackjack() {
+            warnCannotDoubleTextBlackjack = getString(R.string.warnCannotDoubleTextBlackjack);
+
+            warnCannotHitOver21TextBlackJack = getString(R.string.warnCannotHitOver21TextBlackJack);
+
+            warnMoreThanAccaptableTextmenuActivity = getString(R.string.warnMoreThanAccaptableTextmenuActivity);
+
+            warnMoreThanSaveBet = getString(R.string.warnMoreThanSaveBet);
+        }
 
         // Hra
         public void playGame() {
@@ -288,6 +299,24 @@ public class BlackjackGameActivity extends NavigationActivity implements Gambler
 
                     switch (action) {
                         case doubleAction: {
+                            if (gamblerStats.getSazka() * doubleRate > gamblerStats.getBank()) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(BlackjackGameActivity.this, warnMoreThanAccaptableTextmenuActivity, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                break;
+                            }
+                            else if (gamblerStats.getSazka() * doubleRate > gamblerStats.getMaxSaveBet()) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(BlackjackGameActivity.this, warnMoreThanSaveBet, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                break;
+                            }
                             if (cardsGiven <= 2)
                                 doubleWinSet = true;
                             else
@@ -398,7 +427,9 @@ public class BlackjackGameActivity extends NavigationActivity implements Gambler
         protected int validCard(Karta [] balicek) {
             Random rand = new Random();
             int randomNumber;
+
             // Náhodně volí karty, které se ještě vyskytují v balíčku
+
             do {
                 randomNumber = rand.nextInt(maxVelikostBalicku);                                    // resolved thanks to issue on github by Martufa, thanks a lot :3
             } while (balicek[randomNumber].pouzito);

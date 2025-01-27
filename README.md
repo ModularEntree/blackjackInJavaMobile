@@ -15,7 +15,9 @@ Pokus o vyhotovení aplikace s využitím herních mechanik karetní hry Blackja
 ### Blackjack
 - [ ] Opravit gameloopu v Blackjacku
 - [ ] Převést herní smyčku na metody a onlistenery
-- [ ] zprovoznit savebets ve hře u doublu
+- [x] zprovoznit savebets ve hře u doublu
+- [ ] Při vzdávání se vyhodit ujišťovací obrazovku a ne jen toast
+- [ ] runOnUIThread??? Dej tomu smysl, pls
 
 ### Aplikace jako taková
 - [ ] Nastavení ikonky
