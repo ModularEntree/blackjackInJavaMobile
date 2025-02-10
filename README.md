@@ -36,3 +36,16 @@ Pokus o vyhotovení aplikace s využitím herních mechanik karetní hry Blackja
 
 ### MimoAplikační zbytečnosti
 - [x] Aktualizovat README
+
+## VMA seznam požadavků
+
+- [x] Aplikace bude mít alespoň 3 aktivity
+- [x] Aplikace bude nabízet (minimálně) 2 navigační prvky: hlavní navigace (bottom - pro výběr aktivity), action bar (toolbar - s názvem aktivity, přechodem na nadřazenou aktivitu, volbami)
+- [ ] V alespoň 1 aktivitě bude využit implicitní intent pro provedení akce v jiné aplikaci (např. zobrazení webové stránky, zobrazení místa na mapě, zahájení telefonního hovoru, sdílení dat /prostřednictvím emailu, komunikační aplikace, sociálních sítí, apod./)
+- [ ] Bude zajištěno kompletní uložení stavu instance každé aktivity
+- [x] Aplikace bude využívat (pro uložení dat ve tvaru key-value) shared preferences
+- [ ] Pro ukládání většího množství dat bude použit soubor (soubory) v interní paměti zařízení
+- [ ] Pro uložení složitějších strukturovaných dat bude aplikace využívat lokální databázi SQLite
+- [ ] V aplikaci bude využit online zdroj dat (předpokládáme připojení zařízení k Internetu), ideálně poskytující data ve formátu JSON, například veřejné nebo vlastní API (přístup k vlastní online databázi)
+- [ ] Uživatelské rozhraní aplikace bude přehledné a uživatelsky přívětivé
+- [ ] Design aplikace bude (alespoň barevně) přizpůsoben
